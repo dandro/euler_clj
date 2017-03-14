@@ -1,5 +1,5 @@
 (ns euler-clj.core
-  (:require [clojure.math.numeric-tower :as math])
+  (:require [clojure.math.numeric-tower :as m])
   (:gen-class))
 
 ;; 1
@@ -57,13 +57,7 @@
 
 (defn problem-6
   []
-  (let [nums (take 100 (range))]
-    (- (reduce
-         #(+ %1 %2)
-         0
-         nums)
-       (reduce
-         #(+ (math/expt %1 2) (math/expt %1 2))
-         0
-         nums))))
+  (let [nums (take 101 (range))]
+    (- (m/expt (reduce #(+ %1 %2) 0 nums) 2)
+       (reduce + 0 (map #(m/expt % 2) nums)))))
 (println (str "Problem 6: " (problem-6)))
